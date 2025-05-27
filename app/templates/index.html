@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm kiếm Giáo án</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Tìm kiếm Giáo án</h2>
+    <form method="post" action="/search_web">
+        <input type="text" name="text" placeholder="Nhập từ khóa..." required>
+        <button type="submit">🔍</button>
+    </form>
+
+    {% if results %}
+        <h3>Kết quả:</h3>
+        <ul>
+            {% for item in results %}
+                <li><strong>{{ item.score | round(3) }}</strong>: {{ item.content }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

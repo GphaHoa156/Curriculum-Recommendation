@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+h2 {
+    margin-bottom: 1rem;
+}
+
+form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #0b66ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #004ecc;
+}
+
+ul {
+    margin-top: 1rem;
+    padding-left: 1.2rem;
+}
