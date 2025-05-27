@@ -4,10 +4,6 @@ import os
 from qdrant_client import QdrantClient
 from qdrant_client.models import PointStruct
 
-# === CẤU HÌNH ===
-QDRANT_HOST = "https://fd60c49a-d5e7-43d6-8ddc-c1d2532774b9.us-east4-0.gcp.cloud.qdrant.io:6333" 
-QDRANT_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.v65qZseHQZxaXYK6UyETSMI2suWA3iiZR6FAkFyvZCQ" 
-
 # === TẢI DỮ LIỆU ===
 def load_data_qdrant(COLLECTION_NAME, CSV_PATH, VECTORS_PATH):
 
