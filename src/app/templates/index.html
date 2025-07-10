@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Curriculum Search</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css')}}">
+  <style>
+    /* Spinner hidden by default */
+    #loading-spinner {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Curriculum Recommendation</h1>
+
+    <!-- Input and search button -->
+    <div>
+      <input type="text" id="query-input" placeholder="Input query" />
+      <button id="search-button">Search</button>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loading-spinner">🔄 Loading...</div>
+
+    <!-- Result list -->
+    <div id="result-display">
+      <ul id="result-list">
+        {% if results %}
+          {% for item in results %}
+            <li>{{ item.payload.title }}</li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+
+    <!-- Error message display -->
+    {% if error %}
+      <p style="color: red;">{{ error }}</p>
+    {% endif %}
+  </main>
+
+  <!-- JavaScript to handle search logic -->
+  <script>
+  document.getElementById("search-button").addEventListener("click", async () => {
+  const query = document.getElementById("query-input").value;
+  const langCheckbox = document.getElementById("english-only");
+  const spinner = document.getElementById("loading-spinner");
+  const resultList = document.getElementById("result-list");
+
+  if (!query.trim()) return;
+
+  spinner.style.display = "block";
+  resultList.innerHTML = "";
+
+  try {
+    const formData = new URLSearchParams();
+    formData.append("custom_query", query);
+
+    // ✅ Add language filter if checked
+    if (langCheckbox.checked) {
+      formData.append("language", "en");
+    }
+
+    const response = await fetch("/search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: formData
+    });
+
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    const newList = doc.querySelector("#result-list");
+    if (newList) {
+      resultList.innerHTML = newList.innerHTML;
+    } else {
+      resultList.innerHTML = "<li>No results</li>";
+    }
+  } catch (err) {
+    console.error("Search failed:", err);
+    resultList.innerHTML = "<li>Error occurred</li>";
+  } finally {
+    spinner.style.display = "none";
+  }
+  });
+    </script>
+
+  <!-- Language filter checkbox -->
+  <div class="filter-options">
+    <input type="checkbox" id="english-only" />
+    <label for="english-only">Only search in English</label>
+  </div>
+</body>
+</html>

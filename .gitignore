@@ -1,0 +1,12 @@
+data/
+*.csv
+*.npz
+venv/
+.venv/
+.env
+.vscode/
+__pycache__/
+src/*.csv
+.idea/*.*
+
+src/config.yaml
