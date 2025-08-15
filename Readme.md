@@ -1,7 +1,7 @@
 # Project overview
 
 This project is a solution for Kaggle featured competition Learning Equality - Curriculum Recommendations. You can view more details via this link https://www.kaggle.com/competitions/learning-equality-curriculum-recommendations.
-Its goal is to given a lots of **topic** and **content**. We will need to find the correct content for each topic.
+Its goal is to given a lots of **topic** and **content**, then we will need to find the correct content(s) for each topic.
 
 # How it's made:
 - Programming language: Python
